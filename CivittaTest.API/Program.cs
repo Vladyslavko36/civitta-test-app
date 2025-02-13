@@ -1,4 +1,5 @@
 
+using System.Reflection;
 using CivittaTest.API.Middlewares;
 using CivittaTest.API.Services.Implementation;
 using CivittaTest.API.Services.Interfaces;
@@ -23,7 +24,7 @@ namespace CivittaTest.API
             builder.Services.AddControllers();
             builder.Services.AddAuthorization();
 
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c=> c.IncludeXmlComments(GetXmlCommentsFilePath()));
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -60,6 +61,12 @@ namespace CivittaTest.API
             using var context = scope.ServiceProvider.GetService<AppDbContext>();
 
             context!.Database.Migrate();
+        }
+
+        private static string GetXmlCommentsFilePath()
+        {
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            return Path.Combine(AppContext.BaseDirectory, xmlFilename);
         }
     }
 }
