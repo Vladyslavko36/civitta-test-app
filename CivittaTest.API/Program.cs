@@ -1,4 +1,7 @@
 
+using CivittaTest.API.Middlewares;
+using CivittaTest.API.Services.Implementation;
+using CivittaTest.API.Services.Interfaces;
 using CivittaTest.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +29,9 @@ namespace CivittaTest.API
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
 
+            builder.Services.AddScoped<IEnricoService, EnricoService>();
+            builder.Services.AddScoped<IHolidayOperationsService, HolidayOperationsService> ();
+
             var app = builder.Build();
 
             UpdateDatabase(app);
@@ -36,6 +42,8 @@ namespace CivittaTest.API
             });
 
             app.UseSwaggerUI();
+
+            app.UseMiddleware<GlobalErrorHandler>();
 
             app.UseHttpsRedirection();
 

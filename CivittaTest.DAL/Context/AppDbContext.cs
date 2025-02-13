@@ -18,6 +18,8 @@ namespace CivittaTest.DAL.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Country>().HasIndex(c => c.CountryCode);
+
+            modelBuilder.Entity<Region>().HasIndex(c => c.Code);
         }
     }
 }

@@ -1,13 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CivittaTest.DAL.Entities
+﻿namespace CivittaTest.DAL.Entities
 {
     public class Holiday
     {
         public int Id { get; set; }
-
-        [MaxLength(100)]
-        public string Name { get; set; } = null!;
 
         public int CountryId { get; set; }
 
@@ -15,8 +10,10 @@ namespace CivittaTest.DAL.Entities
 
         public DateTime Date { get; set; }
 
-        public Region Region { get; set; } = null!;
+        public virtual Region Region { get; set; } = null!;
 
-        public Country Country { get; set; } = null!;
+        public virtual Country Country { get; set; } = null!;
+
+        public virtual ICollection<HolidayName> HolidayNames { get; set; } = null!;
     }
 }
