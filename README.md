@@ -1,3 +1,5 @@
+# Civitta Interview Task - WEB API application
+
 # Holiday API Project
 
 This project provides various holiday-related endpoints, including a countries list, holidays grouped by month for a given country and year, the status of a specific day, and the maximum number of consecutive free days for a country and year. The data is fetched from the [Enrico API](https://kayaposoft.com/enrico/) and saved in a database to prevent repeated requests.
